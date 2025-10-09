@@ -2,7 +2,7 @@
 
 // Path to the directory to save the notes in, without trailing slash.
 // Should be outside the document root, if possible.
-$save_path = '_tmp';
+$save_path = __DIR__ . '/_tmp';
 
 // Disable caching.
 header('Cache-Control: no-store');
