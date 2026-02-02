@@ -1,9 +1,22 @@
 <?php
 
+// Load environment variables from .env file
+$env_file = __DIR__ . '/.env';
+if (file_exists($env_file)) {
+    $lines = file($env_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) {
+            continue;
+        }
+        list($name, $value) = explode('=', $line, 2);
+        $_ENV[trim($name)] = trim($value);
+    }
+}
+
 // ============ AUTHENTICATION ============
 // Set your username and password here
-$valid_username = 'hi';
-$valid_password = 'hi';  // CHANGE THIS!
+$valid_username = $_ENV['AUTH_USERNAME'] ?? '0';
+$valid_password = $_ENV['AUTH_PASSWORD'] ?? '0';  // CHANGE THIS!
 
 // Check if user is authenticated
 if (!isset($_SERVER['PHP_AUTH_USER']) || 
